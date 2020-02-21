@@ -1,0 +1,42 @@
+---
+layout: post
+title: "关于xampp中的一些坑"
+date: 2020-2-19
+categories: install && unstall
+---
+在安装xampp的过程中，由于我这学期有Java web课程，本机上已经安装了mysql8.0值得一提的是，我的mysql是一直默认点下去的，期间就自己设置了root用户的密码，其余一直next下去，导致漏看了一个很重要的点
+
+
+<figure>
+	<a><img src="{{site.url}}/pics/mysql-install1.png"></a>
+</figure>
+
+
+这就导致我在配置xampp使用本地mysql的过程中虽然在config.inc.php文件中重新填写了本地mysql的root用户及其密码，但一直无法连接到数据库，错误信息如下
+
+
+`mysqli_real_connect(): The server requested authentication method unknown to the client [sha256_password]`
+
+
+在MySQL 8.0.11中，caching_sha2_password是默认的身份验证插件，而不是以往的mysql_native_password。有关此更改对服务器操作的影响以及服务器与客户端和连接器的兼容性的信息，请参阅caching_sha2_password作为首选的身份验证插件。[详情参考][details]
+
+
+所以说人话就是`新版本的mysql账号密码解锁机制不一致导致的`。如果我们安装mysql是如果选择用旧版5.x的密码加密方式就不会有那么多事儿了。
+
+
+那我们首先就应该重装mysql。[完全卸载mysql][how-to-uninstall-mysql]
+
+
+成功登录本地的mysql
+
+
+<figure>
+	<a><img src="{{site.url}}/pics/xampp1.png"></a>
+</figure>
+<figure>
+	<a><img src="{{site.url}}/pics/xampp2.png"></a>
+</figure>
+
+
+[details]:https://dev.mysql.com/doc/refman/8.0/en/caching-sha2-pluggable-authentication.html
+[how-to-uninstall-mysql]:{{site.url}}/install/&&/unstall/2020/02/19/how-to-uninstall-mysql.html
