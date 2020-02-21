@@ -4,6 +4,7 @@ title: "关于xampp中的一些坑"
 date: 2020-2-19
 categories: install && unstall
 ---
+<a name="back"></a>
 在安装xampp的过程中，由于我这学期有Java web课程，本机上已经安装了mysql8.0值得一提的是，我的mysql是一直默认点下去的，期间就自己设置了root用户的密码，其余一直next下去，导致漏看了一个很重要的点
 
 
@@ -37,6 +38,39 @@ categories: install && unstall
 	<a><img src="{{site.url}}/pics/xampp2.png"></a>
 </figure>
 
+*** 
+
+>xampp端口设置 
+
+<a name="port"></a>
+修改xampp端口号：
+打开xampp控制面板点击Apache的config选项，进入`Apache(httpd.conf)`
+
+<figure>
+	<a><img src="{{site.url}}/pics/httpd.png"></a>
+</figure>
+
+ctrl+f 输入`Listen `加上空格精准定位，修改端口后别忘了将之间的`Listen 80`那行代码用`#`注释
+
+接着启动Apache之后在浏览器中输入`127.0.0.1:你的端口号`进行访问
+
+***
+
+>mysql密码配置
+
+<a name="mysql-config"></a>
+打开xampp控制面板点击Apache的config选项，进入`phpMyAdmin(config.inc.php)`
+```
+$cfg['Servers'][$i]['auth_type'] = 'cookie';	/*最好把这个改成cookie*/
+
+/* User for advanced features */
+$cfg['Servers'][$i]['controluser'] = 'root';	
+$cfg['Servers'][$i]['controlpass'] = '123456';	/*改成你的mysql密码*/
+```
+
+接着在`phpMyAdmin`界面输入你刚才设置的密码
+如果出现`mysqli_real_connect(): The server requested authentication method unknown to the client [sha256_password]`类似的错误说明你的数据库选择了最新的加密方式，并非5.x[按以下步骤操作][back]
 
 [details]:https://dev.mysql.com/doc/refman/8.0/en/caching-sha2-pluggable-authentication.html
 [how-to-uninstall-mysql]:{{site.url}}/install/&&/unstall/2020/02/19/how-to-uninstall-mysql.html
+[back]: #back
