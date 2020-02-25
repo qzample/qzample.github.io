@@ -24,7 +24,7 @@ categories: read
 >    * 我们愿意解决问题是因为解决问题能够给我们带来愉悦感
 >    * 愉悦感来源于解决问题的过程，所以太简单或者太难的问题都不能够给我们带来愉悦感
 > 3. 我们是如何思考的
->    * <img src="{{site.url}}/pics/HowBrainWorks.jpg">
+>    * <img src="{{site.url}}/pics/hbw.png">
 
 第一章的内容大致如上，我对上面的几个要点稍作解释
 
